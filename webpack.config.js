@@ -14,7 +14,7 @@ module.exports = {
     index: "index.html",
     port: 9000,
   },
-  mode: "none",
+  mode: "development",
   module: {
     rules: [
       {
@@ -42,9 +42,9 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("development"),
-    }),
+    // new webpack.DefinePlugin({
+    //   "process.env.NODE_ENV": JSON.stringify("development"),
+    // }),
     new HtmlWebPackPlugin({
       template: "./public/index.html", // public/index.html 파일을 읽는다.
       filename: "index.html", // output으로 출력할 파일은 index.html 이다.
