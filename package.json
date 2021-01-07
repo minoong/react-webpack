@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
+    "start": "webpack-dev-server",
     "parcel": "parcel build/index.html"
   },
   "author": "",

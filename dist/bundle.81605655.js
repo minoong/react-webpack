@@ -38407,7 +38407,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     /* harmony import */
 
 
-    var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
+    var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
 
     var Root = function Root() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {

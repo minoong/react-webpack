@@ -8,6 +8,11 @@ module.exports = {
     filename: "bundle.js",
     path: path.resolve(__dirname + "/build"),
   },
+  devServer: {
+    contentBase: path.resolve("./build"),
+    index: "index.html",
+    port: 9000,
+  },
   mode: "none",
   module: {
     rules: [
@@ -28,6 +33,10 @@ module.exports = {
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
     ],
   },
