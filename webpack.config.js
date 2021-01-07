@@ -50,7 +50,8 @@ module.exports = {
       filename: "index.html", // output으로 출력할 파일은 index.html 이다.
     }),
     new MiniCssExtractPlugin({
-      filename: "style.css",
+      filename: "[name].css",
+      chunkFilename: "[id].css",
     }),
   ],
 };
