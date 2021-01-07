@@ -54,4 +54,8 @@ module.exports = {
       chunkFilename: "[id].css",
     }),
   ],
+  resolve: {
+    modules: ["node_modules"],
+    extensions: [".js", ".json", ".jsx", ".css"],
+  },
 };
