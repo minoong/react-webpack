@@ -1,8 +1,14 @@
-import React from "react";
-import "./style.scss";
+import React from 'react';
+import NoteContainer from './containers/note/NoteContainer';
+import 'antd/dist/antd.min.css';
+// import 'antd/dist/antd.less';
 
 const Root = () => {
-  return <h3 className="title">Helasdsaleeeeeeeeeeeo, React!~~!!!</h3>;
+  return (
+    <>
+      <NoteContainer />
+    </>
+  );
 };
 
 export default Root;

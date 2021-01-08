@@ -30,7 +30,13 @@
     "webpack-dev-server": "^3.11.1"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.3.0",
     "@babel/polyfill": "^7.12.1",
-    "parcel": "^1.12.4"
+    "antd": "^4.10.0",
+    "less-loader": "^7.2.1",
+    "parcel": "^1.12.4",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-actions": "^2.6.5"
   }
 }
