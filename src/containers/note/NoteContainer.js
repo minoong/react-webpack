@@ -15,29 +15,38 @@ const NoteContainer = () => {
     noteList: note.noteList,
   }));
 
-  console.log(inputTitle, inputContent, noteList);
-
   const dispatch = useDispatch();
 
-  const handleChangeTitle = (e) => {
-    dispatch(changeInputTitle(e.target.value));
-  };
+  const handleChangeTitle = useCallback(
+    (e) => {
+      dispatch(changeInputTitle(e.target.value));
+    },
+    [dispatch],
+  );
 
-  const handleChangeContent = (e) => {
-    dispatch(changeInputContent(e.target.value));
-  };
+  const handleChangeContent = useCallback(
+    (e) => {
+      dispatch(changeInputContent(e.target.value));
+    },
+    [dispatch],
+  );
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(inputTitle, inputContent);
-    dispatch(addNote(inputTitle, inputContent));
-    dispatch(changeInputTitle(''));
-    dispatch(changeInputContent(''));
-  };
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch(addNote(inputTitle, inputContent));
+      dispatch(changeInputTitle(''));
+      dispatch(changeInputContent(''));
+    },
+    [dispatch, inputTitle, inputContent],
+  );
 
-  const handleRemove = (id) => {
-    dispatch(removeNote(id));
-  };
+  const handleRemove = useCallback(
+    (id) => {
+      dispatch(removeNote(id));
+    },
+    [dispatch],
+  );
 
   return (
     <NoteLayout
