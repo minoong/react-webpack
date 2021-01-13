@@ -2,6 +2,7 @@ import { Layout } from 'antd';
 import React from 'react';
 import AddNote from './AddNote';
 import Note from './note';
+import Toast from './Toast';
 
 const NoteLayout = ({
   inputTitle,
@@ -11,15 +12,10 @@ const NoteLayout = ({
   onChangeContent,
   onSubmit,
   onRemove,
+  length,
 }) => {
   const notes = noteList.map((note) => (
-    <Note
-      key={note.id}
-      id={note.id}
-      title={note.title}
-      content={note.content}
-      onRemove={() => onRemove(note.id)}
-    />
+    <Note key={note.id} id={note.id} title={note.title} content={note.content} onRemove={() => onRemove(note.id)} />
   ));
   return (
     <Layout>
@@ -31,8 +27,9 @@ const NoteLayout = ({
         onSubmit={onSubmit}
       />
       <div>{notes}</div>
+      <Toast length={length} />
     </Layout>
   );
 };
 
-export default NoteLayout;
+export default React.memo(NoteLayout);

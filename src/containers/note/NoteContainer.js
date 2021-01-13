@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NoteLayout from '../../components/note/NoteLayout';
 import { addNote, changeInputContent, changeInputTitle, removeNote } from '../../store/modules/note';
@@ -19,12 +19,9 @@ const NoteContainer = () => {
     [dispatch, noteList],
   );
 
-  const handleChangeContent = useCallback(
-    (e) => {
-      dispatch(changeInputContent(e.target.value));
-    },
-    [dispatch],
-  );
+  const handleChangeContent = useCallback((e) => {
+    dispatch(changeInputContent(e.target.value));
+  }, []);
 
   const handleSubmit = useCallback(
     (e) => {
@@ -52,8 +49,9 @@ const NoteContainer = () => {
       onChangeContent={handleChangeContent}
       onSubmit={handleSubmit}
       onRemove={handleRemove}
+      length={noteList.length}
     />
   );
 };
 
-export default NoteContainer;
+export default React.memo(NoteContainer);

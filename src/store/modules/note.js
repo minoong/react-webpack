@@ -12,10 +12,7 @@ const [SUGGESTS, SUGGESTS_SUCCESS, SUGGESTS_FAILURE] = createRequestActionTypes(
 
 let id = 0;
 
-export const changeInputTitle = createAction(INPUT_TITILE, (title, noteList) => {
-  console.log(title, noteList);
-  return { title, noteList };
-});
+export const changeInputTitle = createAction(INPUT_TITILE, (title, noteList) => title);
 export const changeInputContent = createAction(INPUT_CONTENT, (content) => content);
 export const addNote = createAction(ADD_NOTE, (title, content) => ({
   // id: ++id,
@@ -31,7 +28,7 @@ const test = () => {
 };
 
 export function* segguestSaga() {
-  yield takeLatest(INPUT_TITILE, titleSegguestsSaga);
+  // yield takeLatest(INPUT_TITILE, titleSegguestsSaga);
   yield takeLatest(INPUT_CONTENT, test);
 }
 
@@ -46,10 +43,10 @@ const initState = {
 
 const note = handleActions(
   {
-    // [INPUT_TITILE]: (state, { payload: inputTitle }) => ({
-    //   ...state,
-    //   inputTitle,
-    // }),
+    [INPUT_TITILE]: (state, { payload: inputTitle }) => ({
+      ...state,
+      inputTitle,
+    }),
     [INPUT_CONTENT]: (state, { payload: inputContent }) => ({
       ...state,
       inputContent,
