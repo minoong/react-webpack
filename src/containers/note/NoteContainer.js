@@ -1,12 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NoteLayout from '../../components/note/NoteLayout';
-import {
-  addNote,
-  changeInputContent,
-  changeInputTitle,
-  removeNote,
-} from '../../store/modules/note';
+import { addNote, changeInputContent, changeInputTitle, removeNote } from '../../store/modules/note';
 
 const NoteContainer = () => {
   const { inputTitle, inputContent, noteList } = useSelector(({ note }) => ({

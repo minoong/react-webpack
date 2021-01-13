@@ -13,7 +13,7 @@ export const changeInputContent = createAction(
   (content) => content,
 );
 export const addNote = createAction(ADD_NOTE, (title, content) => ({
-  id: ++id,
+  // id: ++id,
   title,
   content,
 }));
@@ -22,6 +22,7 @@ export const removeNote = createAction(REMOVE_NOTE, (id) => id);
 const initState = {
   inputTitle: '',
   inputContent: '',
+  id: 0,
   noteList: [{ id: 0, title: 'title #1', content: 'content #1' }],
 };
 
@@ -37,7 +38,8 @@ const note = handleActions(
     }),
     [ADD_NOTE]: (state, { payload: note }) => ({
       ...state,
-      noteList: [...state.noteList, note],
+      id: state.id + 1,
+      noteList: [...state.noteList, { ...note, id: state.id + 1 }],
     }),
     [REMOVE_NOTE]: (state, { payload: id }) => ({
       ...state,
