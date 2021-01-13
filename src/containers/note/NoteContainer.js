@@ -14,9 +14,9 @@ const NoteContainer = () => {
 
   const handleChangeTitle = useCallback(
     (e) => {
-      dispatch(changeInputTitle(e.target.value));
+      dispatch(changeInputTitle(e.target.value, noteList));
     },
-    [dispatch],
+    [dispatch, noteList],
   );
 
   const handleChangeContent = useCallback(
