@@ -1,10 +1,24 @@
-import React from 'react';
-import { Card, Button, Input } from 'antd';
+import React, { useState } from 'react';
+import { Card, Button, Input, AutoComplete } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 const { TextArea } = Input;
+const { Option } = AutoComplete;
 
 const AddNote = (props) => {
+  const [result, setResult] = useState([]);
+
+  const handleSearch = (value) => {
+    let res = [];
+
+    if (!value || value.indexOf('@') >= 0) {
+      res = [];
+    } else {
+      res = ['gmail.com', '163.com', 'qq.com'].map((domain) => `${value}@${domain}`);
+    }
+
+    setResult(res);
+  };
   return (
     <Card
       key="addForm"
@@ -24,6 +38,19 @@ const AddNote = (props) => {
         </Button>
       }
     >
+      <AutoComplete
+        style={{
+          width: '60%',
+        }}
+        onSearch={handleSearch}
+        placeholder="input here"
+      >
+        {result.map((email) => (
+          <Option key={email} value={email}>
+            {email}
+          </Option>
+        ))}
+      </AutoComplete>
       <TextArea
         placeholder="내용을 입력하세요."
         rows={3}

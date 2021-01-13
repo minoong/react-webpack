@@ -1,5 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
-import { takeLatest } from 'redux-saga/effects';
+import { takeLatest, take, takeEvery } from 'redux-saga/effects';
 import createRequestSaga, { createRequestActionTypes } from '../../lib/createRequestSaga';
 import * as suggestsAPI from '../../lib/api/suggests';
 
@@ -26,8 +26,13 @@ export const removeNote = createAction(REMOVE_NOTE, (id) => id);
 
 const titleSegguestsSaga = createRequestSaga(INPUT_TITILE, suggestsAPI.getSuggests);
 
+const test = () => {
+  console.log('2222222222');
+};
+
 export function* segguestSaga() {
   yield takeLatest(INPUT_TITILE, titleSegguestsSaga);
+  yield takeLatest(INPUT_CONTENT, test);
 }
 
 const initState = {
