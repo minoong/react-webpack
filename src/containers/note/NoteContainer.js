@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NoteLayout from '../../components/note/NoteLayout';
 import { addNote, changeInputContent, changeInputTitle, removeNote } from '../../store/modules/note';
@@ -11,15 +11,41 @@ const NoteContainer = () => {
     suggests: note.suggests,
   }));
 
-  console.log(suggests);
+  // skeleton test
+  const [skeleton, setSkeleton] = useState(null);
+  const [view, setView] = useState('N');
+
+  useEffect(() => {
+    if (!skeleton) {
+      setSkeleton(
+        setTimeout(() => {
+          setThrottle(null);
+          setView('Y');
+        }, 5000),
+      );
+    }
+  }, [view, setView, skeleton, setThrottle]);
+
+  console.log(view);
+
+  // throttle
+  const [throttle, setThrottle] = useState(null);
 
   const dispatch = useDispatch();
 
   const handleChangeTitle = useCallback(
     (value) => {
-      dispatch(changeInputTitle(value));
+      if (!throttle) {
+        setThrottle(
+          setTimeout(() => {
+            console.log(throttle);
+            setThrottle(null);
+            dispatch(changeInputTitle(value));
+          }, 0),
+        );
+      }
     },
-    [dispatch],
+    [dispatch, throttle, setThrottle],
   );
 
   const handleChangeContent = useCallback((e) => {
@@ -48,6 +74,8 @@ const NoteContainer = () => {
       inputTitle={inputTitle}
       inputContent={inputContent}
       noteList={noteList}
+      skeleton={skeleton}
+      view={view}
       suggests={suggests}
       onChangeTitle={handleChangeTitle}
       onChangeContent={handleChangeContent}

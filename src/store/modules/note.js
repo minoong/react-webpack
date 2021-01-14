@@ -51,7 +51,7 @@ const note = handleActions(
       return {
         ...state,
         inputTitle,
-        suggests,
+        suggests: inputTitle === '' ? [] : suggests,
       };
     },
     [INPUT_CONTENT]: (state, { payload: inputContent }) => ({

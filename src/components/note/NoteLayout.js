@@ -1,5 +1,5 @@
-import { Layout } from 'antd';
-import React from 'react';
+import { Card, Layout, Skeleton, Space, Button, Input } from 'antd';
+import React, { useEffect } from 'react';
 import AddNote from './AddNote';
 import Note from './note';
 import Toast from './Toast';
@@ -14,10 +14,32 @@ const NoteLayout = ({
   onSubmit,
   onRemove,
   length,
+  skeleton,
+  view,
 }) => {
-  const notes = noteList.map((note) => (
-    <Note key={note.id} id={note.id} title={note.title} content={note.content} onRemove={() => onRemove(note.id)} />
-  ));
+  let notes = null;
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     console.log(1);
+  //     ));
+  //   }, 5000);
+  // });
+  if (noteList && view === 'Y') {
+    notes = noteList.map((note) => (
+      <Note key={note.id} id={note.id} title={note.title} content={note.content} onRemove={() => onRemove(note.id)} />
+    ));
+  }
+
+  let skeletonView = [];
+
+  if (view === 'N') {
+    for (let i = 0; i < length; i++) {
+      skeletonView.push(<Skeleton active paragraph={{ rows: 1 }} />);
+    }
+  }
+  console.log(view);
+
   return (
     <Layout>
       <AddNote
@@ -28,7 +50,8 @@ const NoteLayout = ({
         onChangeContent={onChangeContent}
         onSubmit={onSubmit}
       />
-      <div>{notes}</div>
+      {notes && view === 'Y' && <div>{notes}</div>}
+      {skeletonView && skeletonView}
       <Toast length={length} />
     </Layout>
   );
