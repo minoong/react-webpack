@@ -8,6 +8,7 @@ const NoteLayout = ({
   inputTitle,
   inputContent,
   noteList,
+  suggests,
   onChangeTitle,
   onChangeContent,
   onSubmit,
@@ -22,6 +23,7 @@ const NoteLayout = ({
       <AddNote
         inputTitle={inputTitle}
         inputContent={inputContent}
+        suggests={suggests}
         onChangeTitle={onChangeTitle}
         onChangeContent={onChangeContent}
         onSubmit={onSubmit}

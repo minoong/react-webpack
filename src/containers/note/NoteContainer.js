@@ -4,19 +4,22 @@ import NoteLayout from '../../components/note/NoteLayout';
 import { addNote, changeInputContent, changeInputTitle, removeNote } from '../../store/modules/note';
 
 const NoteContainer = () => {
-  const { inputTitle, inputContent, noteList } = useSelector(({ note }) => ({
+  const { inputTitle, inputContent, noteList, suggests } = useSelector(({ note }) => ({
     inputTitle: note.inputTitle,
     inputContent: note.inputContent,
     noteList: note.noteList,
+    suggests: note.suggests,
   }));
+
+  console.log(suggests);
 
   const dispatch = useDispatch();
 
   const handleChangeTitle = useCallback(
-    (e) => {
-      dispatch(changeInputTitle(e.target.value, noteList));
+    (value) => {
+      dispatch(changeInputTitle(value));
     },
-    [dispatch, noteList],
+    [dispatch],
   );
 
   const handleChangeContent = useCallback((e) => {
@@ -45,6 +48,7 @@ const NoteContainer = () => {
       inputTitle={inputTitle}
       inputContent={inputContent}
       noteList={noteList}
+      suggests={suggests}
       onChangeTitle={handleChangeTitle}
       onChangeContent={handleChangeContent}
       onSubmit={handleSubmit}

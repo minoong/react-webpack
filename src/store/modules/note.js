@@ -12,10 +12,9 @@ const [SUGGESTS, SUGGESTS_SUCCESS, SUGGESTS_FAILURE] = createRequestActionTypes(
 
 let id = 0;
 
-export const changeInputTitle = createAction(INPUT_TITILE, (title, noteList) => title);
+export const changeInputTitle = createAction(INPUT_TITILE, (title) => title);
 export const changeInputContent = createAction(INPUT_CONTENT, (content) => content);
 export const addNote = createAction(ADD_NOTE, (title, content) => ({
-  // id: ++id,
   title,
   content,
 }));
@@ -29,6 +28,7 @@ const test = () => {
 
 export function* segguestSaga() {
   // yield takeLatest(INPUT_TITILE, titleSegguestsSaga);
+  yield takeLatest(INPUT_TITILE, test);
   yield takeLatest(INPUT_CONTENT, test);
 }
 
@@ -43,10 +43,17 @@ const initState = {
 
 const note = handleActions(
   {
-    [INPUT_TITILE]: (state, { payload: inputTitle }) => ({
-      ...state,
-      inputTitle,
-    }),
+    [INPUT_TITILE]: (state, { payload: inputTitle }) => {
+      const search = `^${inputTitle}`;
+      const regexp = new RegExp(search, 'g');
+      const suggests = state.noteList.filter(({ title }) => regexp.test(title));
+
+      return {
+        ...state,
+        inputTitle,
+        suggests,
+      };
+    },
     [INPUT_CONTENT]: (state, { payload: inputContent }) => ({
       ...state,
       inputContent,
