@@ -35,11 +35,13 @@ const NoteLayout = ({
 
   if (view === 'N') {
     for (let i = 0; i < length; i++) {
-      skeletonView.push(<Skeleton active paragraph={{ rows: 1 }} />);
+      skeletonView.push(
+        <div>
+          <Skeleton active paragraph={{ rows: 1 }} /> <hr />
+        </div>,
+      );
     }
   }
-  console.log(view);
-
   return (
     <Layout>
       <AddNote
@@ -52,7 +54,7 @@ const NoteLayout = ({
       />
       {notes && view === 'Y' && <div>{notes}</div>}
       {skeletonView && skeletonView}
-      <Toast length={length} />
+      <Toast length={length} view={view} />
     </Layout>
   );
 };
