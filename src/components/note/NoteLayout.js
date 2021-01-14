@@ -1,5 +1,6 @@
-import { Card, Layout, Skeleton, Space, Button, Input } from 'antd';
+import { Card, Layout, Skeleton, Space, Button, Input, Badge, Row, Col } from 'antd';
 import React, { useEffect } from 'react';
+import Pagination from '../commons/Pagination';
 import AddNote from './AddNote';
 import Note from './note';
 import Toast from './Toast';
@@ -19,12 +20,6 @@ const NoteLayout = ({
 }) => {
   let notes = null;
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     console.log(1);
-  //     ));
-  //   }, 5000);
-  // });
   if (noteList && view === 'Y') {
     notes = noteList.map((note) => (
       <Note key={note.id} id={note.id} title={note.title} content={note.content} onRemove={() => onRemove(note.id)} />
@@ -36,14 +31,14 @@ const NoteLayout = ({
   if (view === 'N') {
     for (let i = 0; i < length; i++) {
       skeletonView.push(
-        <div>
+        <div key={i}>
           <Skeleton active paragraph={{ rows: 1 }} /> <hr />
         </div>,
       );
     }
   }
   return (
-    <Layout>
+    <>
       <AddNote
         inputTitle={inputTitle}
         inputContent={inputContent}
@@ -52,10 +47,18 @@ const NoteLayout = ({
         onChangeContent={onChangeContent}
         onSubmit={onSubmit}
       />
-      {notes && view === 'Y' && <div>{notes}</div>}
-      {skeletonView && skeletonView}
-      <Toast length={length} view={view} />
-    </Layout>
+      <Row style={{ padding: '0.5rem' }}>
+        <Col span={24} style={{ textAlign: 'right' }}>
+          <Badge count={view === 'N' ? 'loading...' : length} />
+        </Col>
+      </Row>
+      <Layout style={{ padding: '0.125rem' }}>
+        {notes && view === 'Y' && <div>{notes}</div>}
+        {skeletonView && skeletonView}
+        <Toast length={length} view={view} />
+        <Pagination length={length} />
+      </Layout>
+    </>
   );
 };
 
