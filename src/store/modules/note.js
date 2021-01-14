@@ -61,7 +61,7 @@ const note = handleActions(
     [ADD_NOTE]: (state, { payload: note }) => ({
       ...state,
       id: state.id + 1,
-      noteList: [...state.noteList, { ...note, id: state.id + 1 }],
+      noteList: [{ ...note, id: state.id + 1 }, ...state.noteList],
     }),
     [REMOVE_NOTE]: (state, { payload: id }) => ({
       ...state,

@@ -26,8 +26,6 @@ const NoteContainer = () => {
     }
   }, [view, setView, skeleton, setThrottle]);
 
-  console.log(view);
-
   // throttle
   const [throttle, setThrottle] = useState(null);
 
