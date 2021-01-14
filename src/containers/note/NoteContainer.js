@@ -21,7 +21,7 @@ const NoteContainer = () => {
         setTimeout(() => {
           setThrottle(null);
           setView('Y');
-        }, 5000),
+        }, 2600),
       );
     }
   }, [view, setView, skeleton, setThrottle]);
