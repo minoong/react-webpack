@@ -1,4 +1,8 @@
-import { Card, Layout, Skeleton, Space, Button, Input, Badge, Row, Col } from 'antd';
+import { Card, Layout, Skeleton, Space, Button, Input, Badge, Row, Col, Avatar } from 'antd';
+import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+
+const { Meta } = Card;
+
 import React, { useEffect } from 'react';
 import Pagination from '../commons/Pagination';
 import AddNote from './AddNote';
@@ -31,9 +35,15 @@ const NoteLayout = ({
   if (view === 'N') {
     for (let i = 0; i < length; i++) {
       skeletonView.push(
-        <div key={i}>
-          <Skeleton active paragraph={{ rows: 1 }} /> <hr />
-        </div>,
+        <Card style={{ width: '100%', marginTop: 16 }} key={i}>
+          <Skeleton loading avatar active>
+            <Meta
+              avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+              title="Card title"
+              description="This is the description"
+            />
+          </Skeleton>
+        </Card>,
       );
     }
   }
@@ -49,13 +59,15 @@ const NoteLayout = ({
       />
       <Row style={{ padding: '0.5rem' }}>
         <Col span={24} style={{ textAlign: 'right' }}>
-          <Badge count={view === 'N' ? 'loading...' : length} />
+          <Badge count={view === 'N' ? '1' : length} />
         </Col>
       </Row>
-      <Layout style={{ padding: '0.125rem' }}>
+      <Layout style={{ padding: '0.125rem', maxHeight: '450px', overflow: 'auto' }}>
         {notes && view === 'Y' && <div>{notes}</div>}
         {skeletonView && skeletonView}
         <Toast length={length} view={view} />
+      </Layout>
+      <Layout style={{ padding: '0.125rem' }}>
         <Pagination length={length} />
       </Layout>
     </>
