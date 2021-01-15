@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Button, Card, Typography } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
@@ -11,6 +12,7 @@ const Note = (props) => {
       key={props.id}
       id={props.id}
       title={<h3>{props.title}</h3>}
+      style={{ marginTop: 16 }}
       extra={
         <Button danger type="ghost" onClick={() => props.onRemove(props.id)}>
           {<DeleteOutlined />}

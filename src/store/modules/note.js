@@ -7,6 +7,7 @@ const INPUT_TITILE = 'note/INPUT_TITLE';
 const INPUT_CONTENT = 'note/INPUT_CONTENT';
 const ADD_NOTE = 'note/INPUT_NOTE';
 const REMOVE_NOTE = 'note/REMOVE_NOTE';
+const LIST_NOTE = 'note/LIST_NOTE';
 
 const [SUGGESTS, SUGGESTS_SUCCESS, SUGGESTS_FAILURE] = createRequestActionTypes('note/SUGGESTS');
 
@@ -19,6 +20,7 @@ export const addNote = createAction(ADD_NOTE, (title, content) => ({
   content,
 }));
 export const removeNote = createAction(REMOVE_NOTE, (id) => id);
+export const chageListNote = createAction(LIST_NOTE, (search) => search);
 
 const titleSegguestsSaga = createRequestSaga(INPUT_TITILE, suggestsAPI.getSuggests);
 
@@ -30,6 +32,7 @@ export function* segguestSaga() {
   // yield takeLatest(INPUT_TITILE, titleSegguestsSaga);
   yield takeLatest(INPUT_TITILE, test);
   yield takeLatest(INPUT_CONTENT, test);
+  yield takeLatest(ADD_NOTE, chageListNote);
 }
 
 const initState = {
@@ -38,6 +41,7 @@ const initState = {
   id: 0,
   noteList: [{ id: 0, title: 'title #1', content: 'content #1' }],
   suggests: [],
+  listNote: [],
   error: null,
 };
 
@@ -52,6 +56,16 @@ const note = handleActions(
         ...state,
         inputTitle,
         suggests: inputTitle === '' ? [] : suggests,
+      };
+    },
+    [LIST_NOTE]: (state, { payload: search }) => {
+      console.log('@@@@@@@', search);
+      const regexp = new RegExp(search, 'gi');
+      const listNote = state.noteList.filter(({ title, content }) => regexp.test(title) || regexp.test(content));
+
+      return {
+        ...state,
+        listNote: search === '' ? state.noteList : listNote,
       };
     },
     [INPUT_CONTENT]: (state, { payload: inputContent }) => ({

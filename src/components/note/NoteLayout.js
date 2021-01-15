@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import { Card, Layout, Skeleton, Space, Button, Input, Badge, Row, Col, Avatar } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import PropTypes from 'prop-types';
 
 const { Meta } = Card;
 
@@ -8,6 +10,7 @@ import Pagination from '../commons/Pagination';
 import AddNote from './AddNote';
 import Note from './note';
 import Toast from './Toast';
+import NoteSearch from './NoteSearch';
 
 const NoteLayout = ({
   inputTitle,
@@ -20,12 +23,14 @@ const NoteLayout = ({
   onRemove,
   length,
   skeleton,
+  listNote,
+  onListNote,
   view,
 }) => {
   let notes = null;
 
-  if (noteList && view === 'Y') {
-    notes = noteList.map((note) => (
+  if (listNote && view === 'Y') {
+    notes = listNote.map((note) => (
       <Note key={note.id} id={note.id} title={note.title} content={note.content} onRemove={() => onRemove(note.id)} />
     ));
   }
@@ -57,8 +62,11 @@ const NoteLayout = ({
         onChangeContent={onChangeContent}
         onSubmit={onSubmit}
       />
-      <Row style={{ padding: '0.5rem' }}>
-        <Col span={24} style={{ textAlign: 'right' }}>
+      <Row style={{ padding: '0.5rem' }} justify="center" align="middle">
+        <Col span={22} style={{}}>
+          <NoteSearch onListNote={onListNote} />
+        </Col>
+        <Col span={2} style={{ textAlign: 'right' }}>
           <Badge count={view === 'N' ? '1' : length} />
         </Col>
       </Row>
@@ -73,5 +81,7 @@ const NoteLayout = ({
     </>
   );
 };
+
+NoteLayout.prototype = { inputTitle: PropTypes.string };
 
 export default React.memo(NoteLayout);

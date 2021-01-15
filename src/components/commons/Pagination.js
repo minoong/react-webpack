@@ -15,8 +15,6 @@ const Pagination = ({ length }) => {
       current: Math.ceil(current / pageSize),
       pageSize,
     });
-
-    console.log(pager);
   };
   const onChange = (current, pageSize) => {
     console.log(current, pageSize);
