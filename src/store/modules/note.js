@@ -76,10 +76,25 @@ const note = handleActions(
       id: state.id + 1,
       noteList: [{ ...note, id: state.id + 1 }, ...state.noteList],
     }),
-    [REMOVE_NOTE]: (state, { payload: id }) => ({
-      ...state,
-      noteList: state.noteList.filter((note) => note.id !== id),
-    }),
+    [REMOVE_NOTE]: (state, { payload: id }) => {
+      const noteList = state.noteList.filter((note) => note.id !== id);
+      const listNote = state.listNote.filter((note) => {
+        let isHas = false;
+        for (let i = 0; i < noteList.length; i++) {
+          if (note.id === noteList[i].id) {
+            isHas = true;
+            break;
+          }
+        }
+
+        return isHas;
+      });
+      return {
+        ...state,
+        noteList,
+        listNote,
+      };
+    },
     [SUGGESTS_SUCCESS]: (state, { payload }) => ({
       ...state,
       suggests: payload,

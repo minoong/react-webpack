@@ -64,6 +64,7 @@ const NoteContainer = () => {
 
   const handleRemove = useCallback(
     (id) => {
+      console.log(id);
       dispatch(removeNote(id));
     },
     [dispatch],
