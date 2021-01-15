@@ -76,12 +76,14 @@ const NoteContainer = () => {
   const handleListNote = useCallback(
     (e) => {
       clearTimeout(debounce);
+      dispatch(chageListNote(e.target.value));
+      setView('N');
       debounce = setTimeout(() => {
         message.loading('조회 중...', 0.3);
-        dispatch(chageListNote(e.target.value));
+        setView('Y');
       }, 500);
     },
-    [dispatch],
+    [dispatch, setView],
   );
 
   return (

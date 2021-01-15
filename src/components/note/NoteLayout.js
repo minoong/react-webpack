@@ -30,6 +30,7 @@ const NoteLayout = ({
   let notes = null;
 
   if (listNote && view === 'Y') {
+    console.log(listNote.length);
     notes = listNote.map((note) => (
       <Note key={note.id} id={note.id} title={note.title} content={note.content} onRemove={() => onRemove(note.id)} />
     ));
