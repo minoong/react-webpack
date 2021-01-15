@@ -12,8 +12,14 @@
 - redux, redux-saga
 - redux-persist
 - auto complete 구현
-- throttle 구현
+- throttle, debounce 구현
 
 <div>
-<img src="https://user-images.githubusercontent.com/59505318/104550087-6f19f080-5677-11eb-8a04-514cfe7211bf.gif">
+<img src="https://user-images.githubusercontent.com/59505318/104689318-a951c380-5745-11eb-8cb2-595acab6e255.gif">
+</div>
+
+---
+
+<div>
+<img src="https://user-images.githubusercontent.com/59505318/104689350-ba9ad000-5745-11eb-81ea-4e28bd15f9a1.gif">
 </div>

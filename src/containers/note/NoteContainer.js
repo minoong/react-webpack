@@ -77,7 +77,7 @@ const NoteContainer = () => {
     (e) => {
       clearTimeout(debounce);
       debounce = setTimeout(() => {
-        message.loading('조회 중...', 0.1);
+        message.loading('조회 중...', 0.3);
         dispatch(chageListNote(e.target.value));
       }, 500);
     },
