@@ -72,10 +72,14 @@ const NoteContainer = () => {
 
   const searchValue = useRef();
 
+  var debounce = null;
   const handleListNote = useCallback(
     (e) => {
-      message.loading('조회 중...', 0.1);
-      dispatch(chageListNote(e.target.value));
+      clearTimeout(debounce);
+      debounce = setTimeout(() => {
+        message.loading('조회 중...', 0.1);
+        dispatch(chageListNote(e.target.value));
+      }, 500);
     },
     [dispatch],
   );
