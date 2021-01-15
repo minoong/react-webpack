@@ -79,7 +79,7 @@ const NoteContainer = () => {
       dispatch(chageListNote(e.target.value));
       setView('N');
       debounce = setTimeout(() => {
-        message.loading('조회 중...', 0.3);
+        // message.loading('조회 중...', 0.3);
         setView('Y');
       }, 500);
     },
