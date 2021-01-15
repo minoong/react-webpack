@@ -35,13 +35,12 @@ const NoteContainer = () => {
 
   const handleChangeTitle = useCallback(
     (value) => {
+      dispatch(changeInputTitle(value));
       if (!throttle) {
         setThrottle(
           setTimeout(() => {
-            console.log(throttle);
             setThrottle(null);
-            dispatch(changeInputTitle(value));
-          }, 0),
+          }),
         );
       }
     },

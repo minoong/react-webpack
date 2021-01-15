@@ -59,7 +59,6 @@ const note = handleActions(
       };
     },
     [LIST_NOTE]: (state, { payload: search }) => {
-      console.log('@@@@@@@', search);
       const regexp = new RegExp(search, 'gi');
       const listNote = state.noteList.filter(({ title, content }) => regexp.test(title) || regexp.test(content));
 
